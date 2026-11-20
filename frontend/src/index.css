@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-easy:   #00b8a3;
+    --color-medium: #ffc01e;
+    --color-hard:   #ff375f;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #1e293b; }
+::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+/* Page fade-in */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeIn 0.25s ease both; }
+
+/* Difficulty badge helper classes */
+.badge-easy   { @apply px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wide; background:rgba(0,184,163,.14);   color:#00b8a3; border:1px solid rgba(0,184,163,.3); }
+.badge-medium { @apply px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wide; background:rgba(255,192,30,.12); color:#ffc01e; border:1px solid rgba(255,192,30,.3); }
+.badge-hard   { @apply px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wide; background:rgba(255,55,95,.12);  color:#ff375f; border:1px solid rgba(255,55,95,.3); }
