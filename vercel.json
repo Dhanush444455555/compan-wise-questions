@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm --prefix frontend install && npm --prefix frontend run build",
-  "outputDirectory": "static",
+  "outputDirectory": "public",
   "functions": {
     "api/**/*.py": {
       "includeFiles": "api/leetcode.db"
@@ -9,11 +9,7 @@
   },
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/index.py"
-    },
-    {
-      "source": "/(.*)",
+      "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
   ]
