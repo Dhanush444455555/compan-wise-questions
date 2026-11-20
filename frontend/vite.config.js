@@ -11,6 +11,7 @@ export default defineConfig({
   },
   build: {
     outDir: '../static',
-    emptyOutDir: true,
+    emptyOutDir: false,   // don't wipe the whole static/ folder (keeps favicon.svg etc.)
+    assetsDir: 'assets',
   },
 })

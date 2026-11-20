@@ -301,7 +301,12 @@ def list_all_topics():
     sorted_topics = [{"topic": k, "count": v} for k, v in sorted(topic_counts.items(), key=lambda x: x[1], reverse=True)]
     return sorted_topics
 
-# Serve static frontend
+# Serve static frontend assets (React build output)
+ASSETS_DIR = os.path.join(STATIC_DIR, "assets")
+
+if os.path.isdir(ASSETS_DIR):
+    app.mount("/assets", StaticFiles(directory=ASSETS_DIR), name="assets")
+
 if os.path.isdir(STATIC_DIR):
     app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
@@ -311,6 +316,14 @@ def serve_index():
     if os.path.exists(index_file):
         return FileResponse(index_file)
     return {"message": "LeetCode Company Wise Navigator API is running. Build frontend into static/ folder."}
+
+# Catch-all: serve index.html for any unknown routes (SPA fallback)
+@app.get("/{full_path:path}")
+def spa_fallback(full_path: str):
+    index_file = os.path.join(STATIC_DIR, "index.html")
+    if os.path.exists(index_file):
+        return FileResponse(index_file)
+    return {"error": "Not found"}
 
 if __name__ == "__main__":
     import uvicorn
